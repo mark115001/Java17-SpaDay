@@ -50,9 +50,6 @@ public class SpaDayController {
     @PostMapping(value="")
     public String spaMenu(@RequestParam String name, @RequestParam String skintype, @RequestParam String manipedi, Model model) {
 
-        model.addAttribute("name", name);
-        model.addAttribute("skintype", skintype);
-        model.addAttribute("manipedi", manipedi);
 
         ArrayList<String> facials = new ArrayList<>();
         facials.add("Microdermabrasion");
@@ -61,11 +58,17 @@ public class SpaDayController {
         facials.add("Enzyme Peel");
 
         ArrayList<String> appropriateFacials = new ArrayList<>();
-        for (int i = 0; i < facials.size(); i ++) {
+        for (int i = 0; i < facials.size(); i++) {
             if (checkSkinType(skintype,facials.get(i))) {
                 appropriateFacials.add(facials.get(i));
             }
         }
+
+        model.addAttribute("appropriateFacials", appropriateFacials);
+
+        model.addAttribute("name", name);
+        model.addAttribute("skintype", skintype);
+        model.addAttribute("manipedi", manipedi);
 
         return "menu";
     }
