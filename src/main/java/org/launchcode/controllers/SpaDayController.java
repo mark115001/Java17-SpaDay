@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
+import static java.awt.Color.*;
+
 
 @Controller
 public class SpaDayController {
@@ -28,6 +30,7 @@ public class SpaDayController {
     @ResponseBody
     public String customerForm () {
         String html = "<form method = 'post'>" +
+//        String html = "<form action='/menu', form method = 'post'>" +
                 "Name: <br>" +
                 "<input type = 'text' name = 'name'>" +
                 "<br>Skin type: <br>" +
@@ -41,13 +44,15 @@ public class SpaDayController {
                 "<select name = 'manipedi'>" +
                 "<option value = 'manicure'>Manicure</option>" +
                 "<option value = 'pedicure'>Pedicure</option>" +
+                "<option value = 'both manicure and a pedicure'>Both Mani and Pedi</option>" +
                 "</select><br>" +
                 "<input type = 'submit' value = 'Submit'>" +
                 "</form>";
         return html;
     }
 
-    @PostMapping(value="")
+//    @PostMapping(value="")
+    @PostMapping(value="/menu")
     public String spaMenu(@RequestParam String name, @RequestParam String skintype, @RequestParam String manipedi, Model model) {
 
 
@@ -69,6 +74,15 @@ public class SpaDayController {
         model.addAttribute("name", name);
         model.addAttribute("skintype", skintype);
         model.addAttribute("manipedi", manipedi);
+
+        ArrayList<String> polishChoices = new ArrayList<>();
+        polishChoices.add(String.valueOf(red));
+        polishChoices.add(String.valueOf(green));
+        polishChoices.add(String.valueOf(blue));
+        polishChoices.add(String.valueOf(orange));
+        polishChoices.add(String.valueOf(yellow));
+
+        model.addAttribute("polishChoices", polishChoices);
 
         return "menu";
     }
