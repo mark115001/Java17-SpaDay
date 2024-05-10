@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("user")
 public class UserController {
-
-    @GetMapping("/user/add")
-    public void displayAddUserForm() {
-        return add;
-    }
+//
+//    @GetMapping("/user/add")
+//    public void displayAddUserForm() {
+//        return add;
+//    }
 
 
 }
